@@ -1,11 +1,26 @@
-import type { LocalContext } from "../web-server-context";
 import { buildCommand } from "@stricli/core";
-import { ServerStartAction } from "../actions/server-start.action";
-import { ServerStartCommandFlags } from "../webpages-server.types";
+import { ServerStartCommandFlags } from "../webpages-server.types.ts";
+import {ServerStartAction} from "../actions/server-start.action.ts";
 
 export const serverStartCommand = buildCommand({
-  loader: async (_this: LocalContext, flags: ServerStartCommandFlags) => {
+  /* loader: async (_this: LocalContext, flags: ServerStartCommandFlags) => {
+    logger.info("---serverStartCommand----", flags);
+    if (!flags) {
+      throw new Error("flags is empty");
+    }
+    flags.action = "dev";
     new ServerStartAction().handle(flags);
+  }, */
+  /* loader: (a: any, b: any) => {
+    console.log("----------------------a-----b--");
+    console.log(a, b);
+  }, */
+  loader: async () => {
+    return (flags: ServerStartCommandFlags, ...inputPaths: string[]) => {
+      console.log("call-back---", flags, inputPaths);
+      flags.action = "dev";
+      new ServerStartAction().handle(flags);
+    };
   },
   /* func: (flags: any, input: number) => {
     console.log("func-->", flags, input);

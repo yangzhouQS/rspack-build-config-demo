@@ -9,7 +9,7 @@ import { GeneratePackResultType, PackerEntryItemType } from "../types/packer-con
  * @param {InternalContext} context
  * @returns {any}
  */
-export function formatCommandInclude(context: InternalContext): string[] {
+export function formatCommandInclude(context: InternalContext<any>): string[] {
   const includeOption = context.commandOptions.find(item => item.name === "include");
   if (includeOption && includeOption.value) {
     return includeOption?.value.split(",");
@@ -24,18 +24,18 @@ const entryFormatMap = new Map<number, GeneratePackResultType>();
  * @param {InternalContext} context
  * @returns {{nodeEntries: PackerEntryItemType[], isVue2: boolean, webEntries: PackerEntryItemType[], isVue3: boolean}}
  */
-export function formatEntry(context: InternalContext): GeneratePackResultType {
-  const { config, uuid, commandOptions } = context;
+export function formatEntry(context: InternalContext<any>): GeneratePackResultType {
+  const { config, uuid, commandFlags } = context;
 
   const entries = get(config, "entries", {});
 
-  const includeStr = commandOptions.find(item => item.name === "include");
+  const includeStr = ""; // commandOptions.find(item => item.name === "include");
   let buildIncludes: string[] = [];
-  if (context.action === "dev") {
+  /* if (context.action === "dev") {
     if (includeStr && includeStr.value) {
       buildIncludes.push(...includeStr.value.split(","));
     }
-  }
+  } */
   if (context.action === "build") {
     buildIncludes = Object.keys(entries) as string[];
   }

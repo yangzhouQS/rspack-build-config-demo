@@ -9,7 +9,7 @@
     "pnpm:install": "pnpm install",
     "start:debug": "nest start --debug --watch -b swc",
     "dev": "webpages-packer --env development --config packer-config.ts --watch true --include permission,product,innerUser,login",
-    "dev:build": "webpages-packer build",
+    "server:start": "webpages-server start --env deveploment",
     "build:server": "webpages-packer build",
     "build": "nest build && webpages-packer --env production --config packer-config.ts",
     "start": "node ./dist/controllers/main.js",

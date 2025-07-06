@@ -30,7 +30,7 @@
     "dev": "tsx watch src/bin/webpages-server-cli.ts start --env deveploment",
     "build2": "tsdown --clean",
     "build": "tsdown --clean --dts",
-    "watch": "tsdown --watch"
+    "watch": "tsdown --watch --sourcemap"
   },
   "dependencies": {
     "tree-kill": "1.2.2",
